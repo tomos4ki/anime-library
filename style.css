@@ -1,0 +1,9 @@
+body{
+    background-color: rgb(52, 59, 82);
+}
+.main-window{
+    background-color: #1212335e;
+    width: 99vw;
+    height: 97vh;
+    border-radius: 8px;
+}
