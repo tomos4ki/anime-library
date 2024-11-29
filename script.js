@@ -11,7 +11,7 @@ window.onload = function() {
     }
     else{
         //using the information that is stored in the cookie to configure the website
-        configure-website(cookie);
+        configurewebsite(cookie);
     }
 };
 
@@ -22,6 +22,13 @@ document.getElementById('link-folder-btn').addEventListener('click', function() 
     //getting the selected folder
 
     const folder = document.getElementById('forlder-input').files[0].path;
+    
+    //checking if the required json file exsists
+    //-------------------see you stopped here tomo-----------
+    //------see the text file from where you stopped to continue----
+    
+    
+    
     //creating  the cookie with the folder information
     
     
