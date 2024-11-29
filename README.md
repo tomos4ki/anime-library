@@ -1,4 +1,4 @@
-initial time wasted on this: 2 hours
+initial time wasted on this: 2 hours 15 minutes.
 
 
 
