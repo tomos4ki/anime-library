@@ -189,6 +189,20 @@ that are mapped in the json file, if there is not it will make a json file and a
 folder for the pictures/thumbnails for the shows/films, then it will make a cokie 
 for website that connects to that file, it will expire in 30 days of website unvisit
 
+
+
+
+
+
+------------------------------------------------
+----i'm here , read from here for fixes tomo ---
+-----------------------:)-----------------------
+
+
+
+
+
+
 Codeium
 11:11 am, Nov 29, 2024
 So, when the user selects a folder, even if it's empty, the script will check if 
@@ -277,3 +291,79 @@ you may need to use a different approach to interact with the file system.
 
 Also, this script uses the webkitdirectory attribute to allow directory selection in the file input. 
 This attribute is supported in most modern browsers, but may not work in older
+
+
+
+
+
+
+
+
+------ new prompt------------------
+
+see something. i think searching fo rthe json file in a folder called resources, if it's there it will return the path of that function to another one so it can be used to map everything in the website, and a question . should i make 2 json file for everything or one for mapping the files/folders of the anime and their thumbnails and films and another json for like visits/ times viewed in a selected anime and episode/ film etc...
+
+Codeium
+4:11 pm, Nov 29, 2024
+If you want to search for a JSON file in a folder called "resources" and return the path of the file to another function to map everything in the website, you can use the following code:
+
+html
+CopyInsert
+<!-- Add a script to search for the JSON file in the "resources" folder -->
+<script>
+  window.onload = function() {
+    // Check if the cookie exists
+    const cookie = getCookie('websiteConfig');
+    if (!cookie) {
+      // Display the folder selector
+      document.getElementById('folder-selector').style.display = 'block';
+    } else {
+      // Use the information stored in the cookie to configure the website
+      configureWebsite(cookie);
+    }
+  };
+
+  // Function to search for the JSON file in the "resources" folder
+  function searchJSONFile() {
+    const folder = document.getElementById('folder-input').files[0].path;
+    const jsonFilePath = `${folder}/resources/config.json`;
+    if (fs.existsSync(jsonFilePath)) {
+      // The JSON file exists, return the path to the other function
+      return jsonFilePath;
+    } else {
+      // The JSON file doesn't exist, create it
+      const jsonData = {
+        // default config data
+      };
+      fs.writeFileSync(jsonFilePath, JSON.stringify(jsonData));
+      return jsonFilePath;
+    }
+  }
+
+  // Function to configure the website using the JSON file path
+  function configureWebsite(jsonFilePath) {
+    // TO DO: implement the logic to configure the website using the JSON file path
+    // ...
+  }
+
+  // Helper function to get a cookie
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  // Helper function to set a cookie
+  function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+  }
+</script>
+This script uses the fs module to interact with the file system. It first checks if the JSON file exists in the "resources" folder. If it does, it returns the path of the file. If it doesn't exist, it creates the JSON file with default config data and returns the path of the file.
+
+Regarding your question about using one or two JSON files, it depends on the complexity of your website and the data you need to store. If you have a lot of different types of data to store, such as anime, films, visits, etc., it might be easier to use two JSON files. One JSON file can store the mapping of files/folders, and another JSON file can store the data related to visits, times viewed, etc.
+
+However, if the data is closely related and can be stored in a single JSON file, it might be easier to use one JSON file. For example, if you have a list of anime with their corresponding thumbnails and episodes, you can store all of that information in a single JSON file.
+
+Ultimately, the choice of using one or two JSON files depends on the specific requirements of your website and the data you need to store.
