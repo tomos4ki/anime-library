@@ -99,3 +99,181 @@ Note that this script uses the FileReader API to read the selected file as text.
 
 
 
+after thinking about it i want the function to check if there is a cookie in the browser 
+for this website, the cookie will have the information for the needs of the website, if there 
+is not it will ask to link a folder, the folder can be empt
+
+Codeium
+11:05 am, Nov 29, 2024
+So you want the script to check if a cookie exists in the browser for your website, 
+and if it does, use the information stored in the cookie to configure the website. 
+If the cookie doesn't exist, you want the script to prompt the user to select a folder, 
+which can be empty.
+
+Here's an example of how you can achieve this using JavaScript:
+
+html
+CopyInsert
+<!-- Add a container for the folder selector -->
+<div id="folder-selector" style="display: none; text-align: center;">
+  <p>Please select a folder to link to this website.</p>
+  <input type="file" id="folder-input" webkitdirectory directory>
+  <button id="link-folder-btn">Link Folder</button>
+</div>
+
+<!-- Add a script to check for the cookie and display the folder selector if it doesn't exist -->
+<script>
+  window.onload = function() {
+    // Check if the cookie exists
+    const cookie = getCookie('websiteConfig');
+    if (!cookie) {
+      // Display the folder selector
+      document.getElementById('folder-selector').style.display = 'block';
+    } else {
+      // Use the information stored in the cookie to configure the website
+      configureWebsite(cookie);
+    }
+  };
+
+  // Add an event listener to the button to link the folder
+  document.getElementById('link-folder-btn').addEventListener('click', function() {
+    // Get the selected folder
+    const folder = document.getElementById('folder-input').files[0].path;
+    // Create a cookie with the folder information
+    setCookie('websiteConfig', folder, 30); // expires in 30 days
+    // Hide the folder selector
+    document.getElementById('folder-selector').style.display = 'none';
+    // Configure the website using the folder information
+    configureWebsite(folder);
+  });
+
+  // Helper function to get a cookie
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  // Helper function to set a cookie
+  function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+  }
+
+  // Function to configure the website using the folder information
+  function configureWebsite(folder) {
+    // TO DO: implement the logic to configure the website using the folder information
+  }
+</script>
+This script uses the getCookie and setCookie helper functions to interact with cookies. 
+If the cookie doesn't exist, it displays the folder selector and allows the user to select a folder.
+ Once a folder is selected, it creates a cookie with the folder information and hides 
+ the folder selector. The configureWebsite function is called with the folder information 
+ to configure the website.
+
+Note that this script uses the webkitdirectory attribute to allow directory selection in 
+the file input. This attribute is supported in most modern browsers, but may not work in 
+older browsers.
+
+
+
+
+
+
+
+
+i didn't meantion that when selecting the folder even if empty it will check if 
+there is files like the json, a folder for the video picture, and other folders 
+that are mapped in the json file, if there is not it will make a json file and a 
+folder for the pictures/thumbnails for the shows/films, then it will make a cokie 
+for website that connects to that file, it will expire in 30 days of website unvisit
+
+Codeium
+11:11 am, Nov 29, 2024
+So, when the user selects a folder, even if it's empty, the script will check if 
+the required files and folders exist, such as the JSON file, a folder for video pictures, 
+and other folders mapped in the JSON file. If they don't exist, the script will create them.
+
+Here's an updated example of how you can achieve this:
+
+html
+CopyInsert
+<!-- Add a container for the folder selector -->
+<div id="folder-selector" style="display: none; text-align: center;">
+  <p>Please select a folder to link to this website.</p>
+  <input type="file" id="folder-input" webkitdirectory directory>
+  <button id="link-folder-btn">Link Folder</button>
+</div>
+
+<!-- Add a script to check for the cookie and display the folder selector if it doesn't exist -->
+<script>
+  window.onload = function() {
+    // Check if the cookie exists
+    const cookie = getCookie('websiteConfig');
+    if (!cookie) {
+      // Display the folder selector
+      document.getElementById('folder-selector').style.display = 'block';
+    } else {
+      // Use the information stored in the cookie to configure the website
+      configureWebsite(cookie);
+    }
+  };
+
+  // Add an event listener to the button to link the folder
+  document.getElementById('link-folder-btn').addEventListener('click', function() {
+    // Get the selected folder
+    const folder = document.getElementById('folder-input').files[0].path;
+    // Check if the required files and folders exist
+    if (!fs.existsSync(`${folder}/config.json`)) {
+      // Create the JSON file
+      const jsonData = {
+        // default config data
+      };
+      fs.writeFileSync(`${folder}/config.json`, JSON.stringify(jsonData));
+    }
+    if (!fs.existsSync(`${folder}/thumbnails`)) {
+      // Create the thumbnails folder
+      fs.mkdirSync(`${folder}/thumbnails`);
+    }
+    // ... check and create other required folders and files ...
+
+    // Create a cookie with the folder information
+    setCookie('websiteConfig', folder, 30); // expires in 30 days
+    // Hide the folder selector
+    document.getElementById('folder-selector').style.display = 'none';
+    // Configure the website using the folder information
+    configureWebsite(folder);
+  });
+
+  // Helper function to get a cookie
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  // Helper function to set a cookie
+  function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+  }
+
+  // Function to configure the website using the folder information
+  function configureWebsite(folder) {
+    // TO DO: implement the logic to configure the website using the folder information
+  }
+</script>
+This script uses the fs module to interact with the file system. When the user selects a folder, 
+it checks if the required files and folders exist, and creates them if they don't. 
+It then creates a cookie with the folder information and hides the folder selector.
+
+Note that this script assumes that the fs module is available in the browser. 
+If you're running this script in a Node.js environment,
+you'll need to use the fs module from the node:fs package. 
+If you're running this script in a browser, 
+you may need to use a different approach to interact with the file system.
+
+Also, this script uses the webkitdirectory attribute to allow directory selection in the file input. 
+This attribute is supported in most modern browsers, but may not work in older
