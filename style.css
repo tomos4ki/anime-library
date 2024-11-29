@@ -7,3 +7,7 @@ body{
     height: 97vh;
     border-radius: 8px;
 }
+.folder-selector{
+    display: none;
+    text-align: center;
+}
