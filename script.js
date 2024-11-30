@@ -14,6 +14,8 @@ window.onload = function() {
     else{
         //using the information that is stored in the cookie to configure the website
         configurewebsite(cookie);
+
+        //i'm deleting all this shit
     }
 };
 
@@ -76,7 +78,7 @@ function searchJsonFile(){
 
 //helper function to get the cookie
 function getCookie(name) {
-    const value = `; ${dokument.cookie}`;
+    const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.lenght === 2) return parts.pop().split(';').shift();
 }

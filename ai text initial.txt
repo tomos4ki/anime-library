@@ -194,10 +194,6 @@ for website that connects to that file, it will expire in 30 days of website unv
 
 
 
-------------------------------------------------
-----i'm here , read from here for fixes tomo ---
------------------------:)-----------------------
-
 
 
 
@@ -367,3 +363,73 @@ Regarding your question about using one or two JSON files, it depends on the com
 However, if the data is closely related and can be stored in a single JSON file, it might be easier to use one JSON file. For example, if you have a list of anime with their corresponding thumbnails and episodes, you can store all of that information in a single JSON file.
 
 Ultimately, the choice of using one or two JSON files depends on the specific requirements of your website and the data you need to store.
+
+
+
+
+
+------------------------------------------------
+----i'm here , read from here for fixes tomo ---
+-----------------------:)-----------------------
+
+
+
+
+
+you know what, let's make the cookie in the future, let's make the website get the folder in the first time and as long as i don't close the tab in my browser it won't forget anything, it will get the fata from the json file that is in the config/config.json in the folder and from it it will mmake the edits based on the json file
+
+Codeium
+1:00 pm, Nov 30, 2024
+Let's focus on getting the folder and reading the JSON file for now.
+
+Here's an updated code that uses the input element to select a folder, and then reads the config.json file from that folder:
+
+javascript
+CopyInsert
+// script.js
+document.addEventListener('DOMContentLoaded', function() {
+  const folderInput = document.getElementById('folder-input');
+  const folderSelector = document.getElementById('folder-selector');
+
+  folderInput.addEventListener('change', function() {
+    const folderPath = folderInput.value;
+    const configFilePath = `${folderPath}/config/config.json`;
+
+    // Read the config.json file
+    fetch(configFilePath)
+      .then(response => response.json())
+      .then(data => {
+        console.log('Config data:', data);
+        // Use the data to make edits to the website
+      })
+      .catch(error => {
+        console.error('Error reading config file:', error);
+      });
+  });
+
+  folderSelector.style.display = 'block';
+});
+And here's the updated HTML:
+
+html
+CopyInsert
+<!-- index.html -->
+<input type="file" id="folder-input" webkitdirectory directory />
+<div id="folder-selector" style="display: none;">
+  <label for="folder-input">Select a folder:</label>
+  <input type="file" id="folder-input" webkitdirectory directory />
+</div>
+This code uses the input element with the webkitdirectory attribute to allow 
+the user to select a folder. When the user selects a folder, the code reads 
+the config.json file from that folder using the fetch API.
+
+Note that this code assumes that the config.json file is located in a subfolder 
+called config within the selected folder. If your file structure is different, 
+you'll need to adjust the code accordingly.
+
+Also, this code uses the fetch API to read the JSON file, which is a modern API 
+that may not work in older browsers. If you need to support older browsers, you 
+may need to use a different approach, 
+such as using the XMLHttpRequest object or a library like jQuery.
+
+
