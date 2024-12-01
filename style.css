@@ -1,13 +1,81 @@
 body{
-    background-color: #000000;
+    background-color: #000;
+    margin: 0;
+    padding: 0;
 }
 .main-window{
     background-color: #56565c5e;
-    width: 99vw;
-    height: 97vh;
+    width: 97%;
+    margin: 0 auto;
+    padding: 10px;
     border-radius: 8px;
+    box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),;
 }
 .folder-selector{
     display: none;
     text-align: center;
+}
+.top{
+    position: fixed;
+    top: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    height: 60px;
+    background-color: antiquewhite;
+    z-index: 100;
+    border-radius: 8px;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 10px;
+/*     
+    display: block;
+    
+     */
+}
+
+.header{
+    background-color: #ee2626;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.header ul{
+    background-color: rgb(204, 151, 81);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.header li{
+    margin-right: 40px;
+    text-align: center;
+    border: 4px solid #000;
+    border-radius: 15px;
+    text-align: center;
+    padding: 5px;
+    background-color: #beb2b2;
+}
+
+
+.header > * {
+    flex: 1;
+}
+
+.header input[type="text"]{
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: #fff;
+    font-size: 16px;
+    margin-left: auto;
 }

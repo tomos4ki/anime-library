@@ -1,5 +1,5 @@
-initial time wasted on this: 2 hours 15 minutes.
-
+initial time wasted on this: 3 hours 30 minutes.
+i'm noob, i know it, even with ai i still take all this time
 
 
 
