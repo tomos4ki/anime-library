@@ -1,0 +1,39 @@
+i just found them on th internet but mabe i will use some of them
+
+
+    Made with Bootstrap 4.3.1
+    Fully HTML and CSS W3C Validated
+    Pixel Perfect Template
+    Perfect Use Mobile Navigation
+    Trending Anime Section
+    Top Anime Section
+    Filter Anime Section
+    Recent Articles Section
+    Video Section
+    Blog Section
+    Anime Category
+    Unique Icon Used
+    Easy to Change Layout
+    Fully Responsive Layout
+    Well Commented every line code
+    Cross-browser Supported
+
+Credits:
+
+    Google font
+    Bootstrap 4.3.1
+    acmeticker
+    Freepic
+    pngegg
+    Google font
+    Font Awesome
+    SlicK
+    jQuery
+    themify-icons
+
+
+
+
+
+Features:
+Premium Responsive Pro Bootstrap Mobile Layout Included Multipurpose Dropdown Menu Sample content Blog Gallery Portfolio Forum HTML 5 JQuery HTML plus JS Background video Lazy Load effect
