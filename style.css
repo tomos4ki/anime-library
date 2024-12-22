@@ -13,6 +13,14 @@ body{
     /* height: 100vh; */
 }
 .folder-selector{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid #928c8c;
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #363636;
     display: none;
     text-align: center;
 }
