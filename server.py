@@ -23,6 +23,20 @@ def check_config():
             "exists" : False
         })
 
+@app.route('/create_config', methodS=['POST'])
+def create_config():
+    anime_folder = request.json['anime_folder']
+    config = {
+        "anime_folder" : anime_folder
+    }
+    with open(CONFIG_FILE, 'w') as f:
+        json.dump(config, f)
+    return jsonify({
+        "success" : True,
+        "message" : "config file created successfully.",
+        "anime_folder" : anime_folder
+        })
+
 @app.route('/check_config', methods=['GET'])
 def list_files():
     directory = request.json['directory']
