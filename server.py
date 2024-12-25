@@ -4,7 +4,8 @@ import json
 
 app = Flask(__name__)
 
-APP_DIR = os.path.dirname()
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_FILE = os.path.join(APP_DIR, 'config.json')
 
 @app.route('/list_files', methods=['POST'])
 def list_files():
