@@ -1,3 +1,15 @@
+pwsh /home/tomo/Desktop/things/anime-library/linux.sh
+
+Id     Name            PSJobTypeName   State         HasMoreData     Location             Command
+--     ----            -------------   -----         -----------     --------             -------
+1      Job1            BackgroundJob   Running       True            localhost            Microsoft.PowerShell.Man…
+
+
+
+
+
+
+
 i just found them on th internet but mabe i will use some of them
 
 
