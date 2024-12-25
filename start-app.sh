@@ -5,20 +5,29 @@
 OS=$(uname -s)
 problem = "if you have a problem please go to https://github.com/tomos4ki/anime-library/issues and make new issue regaring your problem."
 
+sudo_no_pass() {
+    echo "unning : $@"
+    echo "your_sudo_password" | sudo -S $@
+}
 
 #check if httpserver is installed
 
-if command -v http-server &> /dev/null
-then
-    echo "http-server is already installed. Skipping installation..."
-else
+if ( Get-coommand http-server -ErrorAction SilentyContinue){
+    Erite-Output "http-server is already installed, Skipping installation"
+}
     #checking if npm is installed
-    if command -v npm &> /dev/null
-    then
-        echo "npm is already installed. Installing http-server using npm..."
-        npm install -g http-server
+    else {
+        if( Get-command npm -ErrorAction SilentlyContinue){
+            Write-Output "npm is already installed, Skipping installation"
+            npm install -g http-server
+        }
+        else{
+            #install npm and http-server based on the operating system
+            Write-Output "Installing npm and http-server
+        }
+    }
     else
-        #install npm and http-server based on the operating system
+        
         if [ "$OS" == "linux" ]; then
             #Installing http-server on linux (kali what i have currently)
             echo "installing http-server on linux ..."

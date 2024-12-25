@@ -98,24 +98,101 @@
 //     //TO DO implement the logic to configure the website using the folder informmation
 // }
 
-window.onload = function() {
-    const folderSelector = document.querySelector('.folder-selector');
-    console.log("the folder selector div is",folderSelector); //needs to be remmoved after testing
-    const configJsonPath = './config/jscon/config.json';
-    
-    
-    //checkinbg if the config file exsists
-    fetch(configJsonPath)
-        .then(responce =>{
-            if (responce.statue === 404) {
-                //file don't exsist, display folder selector
-                folderSelector.style.display = 'block';
+document.addEventListener ('DOMContentLoaded', function() {
+    const jsonSelector = document.getElementById('json-selector');
+    const folderSelector = document.getElementById('folder-selector');
+    const yesJsonBtn = document.getElementById('yes-json');
+    const noJsonBtn = document.getElementById('no-json');
+    const jsonFileInput = document.getElementByIdd('json-file-input');
+    const jsonFileUpload = document.getElementById('upload-json');
+    const selectFolderBtn = document.getElementById('select-folder');
+    const createFolderBtn = document.getElementById('create-folder');
+
+    //first,,, checking if the config file exists
+    checkConfigFile();
+
+    function checkConfigFile() {
+        fetch('http://localhost:5000/check_config')
+        .then(responce => responce.json())
+        .then(data => {
+            if (data.exists){
+                console.log("config exists. anime folder:", data.anime_folder);
+                messageDiv.insertText = data.message || "config file found.";
+                jsonSelector.style.display = 'none';
             } else {
-                //file exists, continue with project
-                folderSelector.style.display = 'none';
+                jsonSelector.style.display = 'block';
             }
         })
         .catch(error => {
-            console.error(error);
-        })
-}
+            console.error('error checking config:',error);
+            jsonSelector.style.display = 'block';
+        });
+    }
+    yesJsonBtn.addEventListener('click', function(){
+        jsonFileInput.style.display = 'block';
+    });
+    noJsonBtn.addEventListener('click', function(){
+        jsonFileSelector.style.display = 'none';
+        folderSelector.style.display = 'block';
+    });
+
+    uploadJsonBtn.addEventListener('click', function(){
+        const file = jsonFileUpload.files[0];
+        if(file && file.name === 'config.json'){
+            const reader = new FileReadder();
+            reader.onload = function(e){
+                const jsonContent = e.target.result;
+                fetch('http://localhost:5000/upload_config', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: jsonContent,
+                })
+                .then(responce => responce.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log('config uploaded successfully');
+                        messageDiv.innerText = data.anime_folder;
+                        jsonSelector.style.display = 'none';
+                        jsonFileInput.style.display = 'none';
+                    } else {
+                        console.error('Failed to upload confiog', data.message);
+                        alert('Failed too upload config: ' + data.message);
+                    }
+                })
+                .catch(error =>{
+                    console.error('Error: ', error);
+                    alert('Error uploading config file.');
+                });
+            };
+            reader.readAsText(file);
+
+            // next thing to do here, functionality i will add...
+        } else {
+            aalert('Please select a json named "config.json" first.');
+        }
+    });
+
+
+
+    // const folderSelector = document.querySelector('.folder-selector');
+    // console.log("the folder selector div is",folderSelector); //needs to be remmoved after testing
+    // const configJsonPath = './config/json/config.json';
+    
+    
+    // //checkinbg if the config file exsists
+    // fetch(configJsonPath)
+    //     .then(responce =>{
+    //         if (responce.statue === 404) {
+    //             //file don't exsist, display folder selector
+    //             folderSelector.style.display = 'block';
+    //         } else {
+    //             //file exists, continue with project
+    //             folderSelector.style.display = 'none';
+    //         }
+    //     })
+    //     .catch(error => {
+    //         console.error(error);
+    //     })
+})

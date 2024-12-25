@@ -22,11 +22,22 @@
                 </ul>
             </div>
         </div>
+        <!-- Adding json selector if the folder don't have json in it-->
+         <div class="json-selector" id="json-selector">
+            <h2>JSON File Selector</h2>
+            <p>Have you used this app before and have a JSON file backed up?</p>
+            <button id="yes-json">Yes</button>
+            <button id="no-json">No</button>
+            <div class="json-file-input" style="display: none;">
+                <input type="file" id="json-file"accept=".json">
+                <button id="upload-json"></button>
+            </div>
+         </div>
         <!-- adding a container for the folder selector -->
          <div class="folder-selector" id="folder-selector">
             <p>Please select a folder that have your anime library.</p>
             <input type="file" name="folder-input" id="forlder-input" webkitdirectory diractory>
-            <button id="link-folder-btn">Link folder</button>
+            <button id="select-folder">Select folder</button>
             <p>I don't have a folder yet <button id="create-folder">Create folder</button></p> 
             <p>want to make the folder in the project<button id="create-folder-in-project">create</button></p>
             <p>Note: The content you will be added will be in the project folder, so be aware of the size increase.</p>

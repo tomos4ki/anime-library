@@ -102,3 +102,14 @@ body{
 .main-search-bar{
     margin-left: 10px;
 }
+
+.json-selector{
+    margin: 20px;
+    padding: 20px;
+    boder: 1px solidd #ccc;
+}
+button {
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
