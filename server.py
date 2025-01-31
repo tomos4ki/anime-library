@@ -1,12 +1,15 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory, render_template
 import os
 import json
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_FILE = os.path.join(APP_DIR, 'config.json')
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/check_config', methods=['GET'])
 def check_config():
@@ -83,5 +86,5 @@ def create__folder():
     except Exception as e:
         return jsonify({"success": False, "message": f"Error creating folder :{str(e)}"})
     
-if __name__ == "__main___":
+if __name__ == "__main__":
     app.run(port=5000)
